@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- overriding for Renderer class -->
+    <preference for="Magento\Framework\View\Page\Config\Renderer" type="Maginium\Foundation\Interceptors\Framework\View\Page\Config\Renderer" />
+
+    <!-- overriding for ServiceInputProcessor class -->
+    <preference
+        for="Magento\Framework\Webapi\ServiceInputProcessor"
+        type="Maginium\Foundation\Interceptors\Framework\Webapi\ServiceInputProcessor"
+    />
+
+    <!-- overriding for TypeResolver class -->
+    <preference for="Magento\Framework\EntityManager\TypeResolver" type="Maginium\Foundation\Interceptors\EntityManager\TypeResolver" />
+
+    <!-- overriding for Status class -->
+    <preference for="Magento\Framework\Module\Status" type="Maginium\Foundation\Interceptors\Framework\Module\Status" />
+
+    <!-- Define a preference for the page config Magento\Framework\View\Design\Theme\FlyweightFactory to use Maginium\Foundation\Interceptors\View\Design\Theme\FlyweightFactory -->
+    <preference
+        for="Magento\Framework\View\Design\Theme\FlyweightFactory"
+        type="Maginium\Foundation\Interceptors\Framework\View\Design\Theme\FlyweightFactory"
+    />
+
+    <!-- Dumper Interceptor -->
+    <type name="Magento\Framework\App\Http">
+        <plugin name="register_dumpers" type="Maginium\Foundation\Interceptors\App\RegisterDumpers" />
+    </type>
+
+    <!-- Set the frontend theme -->
+    <type name="Magento\Theme\Model\View\Design">
+        <arguments>
+            <argument xsi:type="array" name="themes">
+                <item xsi:type="string" name="frontend">Magento/blank</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure AssetManager arguments -->
+    <type name="Maginium\Foundation\Setup\AssetManager">
+        <arguments>
+            <!-- Define file extensions -->
+            <argument xsi:type="array" name="fileExtensions">
+                <item xsi:type="string" name="jpg">jpg</item>
+                <!-- JPG files -->
+                <item xsi:type="string" name="png">png</item>
+                <!-- PNG files -->
+                <item xsi:type="string" name="svg">svg</item>
+                <!-- SVG files -->
+                <item xsi:type="string" name="gif">gif</item>
+                <!-- GIF files -->
+                <item xsi:type="string" name="webp">webp</item>
+                <!-- WEBP files -->
+                <item xsi:type="string" name="jpeg">jpeg</item>
+                <!-- JPEG files -->
+            </argument>
+        </arguments>
+    </type>
+</config>
